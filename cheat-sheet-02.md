@@ -1,6 +1,6 @@
-Here’s a Markdown-formatted version of the content, organized for clarity and readability:
-
+ 
 ---
+![Untitled-1 md 1](https://github.com/user-attachments/assets/b41125ae-f487-48ac-9b7e-dbc2295035c6)
 
 ## Disaster Recovery (DR) Approaches
 
@@ -22,6 +22,7 @@ Here’s a Markdown-formatted version of the content, organized for clarity and 
 ---
 
 ## Storage
+![Untitled-1 md 4](https://github.com/user-attachments/assets/6ed71ff5-da90-4455-8283-3e154564ed71)
 
 ### Instance Store
 
@@ -38,6 +39,7 @@ Here’s a Markdown-formatted version of the content, organized for clarity and 
   - Data is lost if the instance is stopped or terminated.
 
 ### EBS (Elastic Block Store)
+![Untitled-1 md 5](https://github.com/user-attachments/assets/2f09ea1c-ff13-47bf-9c0b-2ac2aa4d8a6c)
 
 - **Types of Volumes**  
   - **General Purpose SSD (gp2, gp3)**: Low-latency interactive apps, dev/test environments.
@@ -105,6 +107,7 @@ Here’s a Markdown-formatted version of the content, organized for clarity and 
   - Aurora Serverless automatically scales capacity.
 
 ### RDS (Relational Database Service)
+![Untitled-1 md 6](https://github.com/user-attachments/assets/aaeb6d4a-adcc-495e-a61f-6b9c1d08dcf6)
 
 - **Features**  
   - **Transactional DB (OLTP)**.
@@ -114,6 +117,7 @@ Here’s a Markdown-formatted version of the content, organized for clarity and 
   - Point-in-time restore (PITR) for recent backups.
 
 ### ElastiCache
+![Untitled-1 md 7](https://github.com/user-attachments/assets/98e54a1a-bc80-4567-847f-1cfd36010838)
 
 - **Types**  
   - **Redis**: Replication, high availability, token protection, optional in-transit encryption.
@@ -123,6 +127,7 @@ Here’s a Markdown-formatted version of the content, organized for clarity and 
   - Improve performance by caching database queries or S3 data.
 
 ### DynamoDB
+![Uploading Untitled-1.md.8.png…]()
 
 - **Features**  
   - Key/value storage with millisecond performance.
