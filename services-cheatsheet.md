@@ -152,6 +152,7 @@ Here's a more readable and organized format for the content about Amazon Route 5
 ---
 
 # AWS Route 53
+<img width="960" alt="image" src="https://github.com/user-attachments/assets/2b4ff0a6-735a-42d5-934e-71f61c2021d2">
 
 ## Routing Policies
 - **Geolocation Routing**: Routes traffic based on the location of the user.
@@ -221,6 +222,11 @@ Here's a more readable and organized format for the content about Amazon Route 5
 ## Data Transfer
 - Use AWS DataSync for large data transfers to S3, EFS, FSx, NFS, SMB shares, or AWS Snowcone.
 - Use DMS for copying databases.
+
+![image](https://github.com/user-attachments/assets/eef5b956-cb41-4f69-8e30-92f2078db243)
+
+
+
 
 ![image](https://github.com/user-attachments/assets/01a0dc6f-4dc2-402b-81ac-28355bc5d444)
 
