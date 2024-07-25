@@ -10,7 +10,7 @@
 - **Compute-Optimized Examples:**
   - C4 instances (Haswell chips)
   - C5 instances (Skylake with Nitro system)
-![image](https://github.com/user-attachments/assets/0b6fbd42-519d-41af-8e8d-d6b7cbabad24)
+![image](https://github.com/user-attachments/assets/6ce4ffbc-edb1-4034-a407-03313edc52a5)
 
 ## Instance Purchasing Options
 - **On-Demand Instances**: Default option for short-term, ad-hoc jobs that can’t be interrupted.
@@ -59,10 +59,10 @@
   - **Cooldown Period**: Reducing cooldown periods can save costs by terminating unneeded instances faster.
 - **Enhanced Networking**: Provides higher bandwidth, higher PPS, and lower inter-instance latency.
 
+![image](https://github.com/user-attachments/assets/0b6fbd42-519d-41af-8e8d-d6b7cbabad24)
 
 
 
-![image](https://github.com/user-attachments/assets/6ce4ffbc-edb1-4034-a407-03313edc52a5)
 
 
 
