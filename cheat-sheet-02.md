@@ -127,7 +127,8 @@
   - Improve performance by caching database queries or S3 data.
 
 ### DynamoDB
-![Uploading Untitled-1.md.8.png…]()
+ 
+![Untitled-1 md 8](https://github.com/user-attachments/assets/d439f378-f344-48ae-98d2-b3f875284dd9)
 
 - **Features**  
   - Key/value storage with millisecond performance.
