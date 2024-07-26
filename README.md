@@ -63,10 +63,40 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Federation](##identity-and-access-management-iam-federation)
 
 ### Key Management Service (KMS)
-- [Overview](##key-management-service-kms-overview)
-- [Key Types](##key-management-service-kms-key-types)
-- [Key Rotation](##key-management-service-kms-key-rotation)
-- [Best Practices](##key-management-service-kms-best-practices)
+
+#### Overview
+- **AWS Key Management Service (KMS)** is a centralized service to create, manage, and rotate customer master keys (CMKs) used for encryption at rest.
+- **Purpose**: Simplifies key management and integrates with other AWS services to enhance data security.
+
+#### Key Types
+- **Symmetric CMKs**: Uses a single key for both encryption and decryption operations.
+- **Asymmetric CMKs**: Uses a public/private key pair. The public key is used for encryption or signature verification, while the private key is used for decryption or signature creation.
+
+#### Key Rotation
+- **Automatic Rotation**: CMKs can be configured to automatically rotate once per year.
+- **Old Key Versions**: KMS retains older key versions to decrypt data encrypted with previous keys.
+
+#### Key Management
+- **Creation**: CMKs can be created via the AWS Management Console, CLI, or API.
+- **Key Policies**: Define who can manage or use CMKs. Policies are attached directly to the CMK.
+- **Grants**: Provide temporary access to CMKs for specific actions.
+- **Aliases**: User-friendly names for CMKs. They make it easier to reference keys.
+
+#### Encryption and Decryption
+- **Direct Encryption**: KMS can encrypt small amounts of data directly.
+- **Envelope Encryption**: Encrypts large datasets by using a data encryption key (DEK) to encrypt the data and then encrypts the DEK with a CMK.
+
+#### Integration with Other AWS Services
+- **S3**: Encrypts objects in S3 buckets.
+- **EBS**: Encrypts EBS volumes to protect data at rest.
+- **RDS**: Encrypts RDS databases and snapshots.
+- **Lambda**: Securely access CMKs from Lambda functions.
+
+#### Best Practices
+- **Enable Key Rotation**: Regularly rotate keys to enhance security.
+- **Least Privilege Access**: Use IAM policies and key policies to enforce the principle of least privilege.
+- **Logging and Monitoring**: Use AWS CloudTrail to log and monitor KMS operations.
+
 
 ### Security Best Practices
 - [Data Encryption](##security-best-practices-data-encryption)
@@ -126,6 +156,8 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Enterprise Support](##support-plans-enterprise-support)
 
 ---
+
+ 
 
 ### Notes
 - The percentages listed are approximate and represent the weight of each domain in the exam.
