@@ -186,11 +186,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 
 ## Monitoring and Reporting (5-10%)
 
-Certainly! Below is the detailed section for **Monitoring and Reporting** focusing on CloudWatch metrics, alarms, logs, and dashboards.
-
-```markdown
-## Monitoring and Reporting (5-10%)
-
+ 
 ### CloudWatch
 
 #### Metrics and Alarms
@@ -231,8 +227,6 @@ Certainly! Below is the detailed section for **Monitoring and Reporting** focusi
 
 ---
 
- 
-```
 
 ### CloudTrail
 - [Event Logging](##cloudtrail-event-logging)
