@@ -1,6 +1,3 @@
-Certainly! Below is an updated version of the Markdown file with the estimated coverage percentages for each exam domain. These percentages represent the approximate weight of each topic in the AWS Certified Solutions Architect - Associate (SAA-C03) exam. This can help prioritize study areas based on their importance.
-
-```markdown
 # AWS Certified Solutions Architect - Associate (SAA-C03) Exam Topics
 
 This document provides an overview of the AWS Certified Solutions Architect - Associate (SAA-C03) exam topics. Each section contains links to relevant topics for easier navigation, along with estimated coverage percentages to help prioritize your study efforts.
@@ -134,7 +131,3 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - The percentages listed are approximate and represent the weight of each domain in the exam.
 - This document is a high-level overview of the exam topics. For detailed study, refer to AWS documentation and resources.
 - Keep your AWS skills up to date with hands-on practice and exam readiness materials.
-```
-
-Content is created taking help from AI tools
- 
