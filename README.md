@@ -1,33 +1,36 @@
+Certainly! Below is an updated version of the Markdown file with the estimated coverage percentages for each exam domain. These percentages represent the approximate weight of each topic in the AWS Certified Solutions Architect - Associate (SAA-C03) exam. This can help prioritize study areas based on their importance.
+
+```markdown
 # AWS Certified Solutions Architect - Associate (SAA-C03) Exam Topics
 
-This document provides an overview of the AWS Certified Solutions Architect - Associate (SAA-C03) exam topics. Each section contains links to relevant topics for easier navigation.
+This document provides an overview of the AWS Certified Solutions Architect - Associate (SAA-C03) exam topics. Each section contains links to relevant topics for easier navigation, along with estimated coverage percentages to help prioritize your study efforts.
 
 ## Table of Contents
 
-1. [AWS Core Services](#aws-core-services)
+1. [AWS Core Services (40-45%)](#aws-core-services)
    - [Compute](#compute)
    - [Storage](#storage)
    - [Database](#database)
    - [Networking](#networking)
-2. [Security and Compliance](#security-and-compliance)
+2. [Security and Compliance (25-30%)](#security-and-compliance)
    - [Identity and Access Management (IAM)](#identity-and-access-management-iam)
    - [Key Management Service (KMS)](#key-management-service-kms)
    - [Security Best Practices](#security-best-practices)
-3. [Architectural Design](#architectural-design)
+3. [Architectural Design (25-30%)](#architectural-design)
    - [High Availability and Disaster Recovery](#high-availability-and-disaster-recovery)
    - [Scalability and Elasticity](#scalability-and-elasticity)
    - [Performance Optimization](#performance-optimization)
-4. [Deployment and Provisioning](#deployment-and-provisioning)
+4. [Deployment and Provisioning (5-10%)](#deployment-and-provisioning)
    - [Infrastructure as Code (IaC)](#infrastructure-as-code-iac)
    - [Deployment Strategies](#deployment-strategies)
-5. [Monitoring and Reporting](#monitoring-and-reporting)
+5. [Monitoring and Reporting (5-10%)](#monitoring-and-reporting)
    - [CloudWatch](#cloudwatch)
    - [CloudTrail](#cloudtrail)
-6. [Pricing and Support](#pricing-and-support)
+6. [Pricing and Support (5-10%)](#pricing-and-support)
    - [Cost Management](#cost-management)
    - [Support Plans](#support-plans)
 
-## AWS Core Services
+## AWS Core Services (40-45%)
 
 ### Compute
 - [EC2 (Elastic Compute Cloud)](##compute-ec2)
@@ -54,7 +57,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [CloudFront](##networking-cloudfront)
 - [Direct Connect](##networking-direct-connect)
 
-## Security and Compliance
+## Security and Compliance (25-30%)
 
 ### Identity and Access Management (IAM)
 - [Users and Groups](##identity-and-access-management-iam-users-and-groups)
@@ -73,7 +76,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Network Security](##security-best-practices-network-security)
 - [IAM Best Practices](##security-best-practices-iam)
 
-## Architectural Design
+## Architectural Design (25-30%)
 
 ### High Availability and Disaster Recovery
 - [Designing for Fault Tolerance](##high-availability-and-disaster-recovery-designing-for-fault-tolerance)
@@ -90,7 +93,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Content Delivery](##performance-optimization-content-delivery)
 - [Resource Optimization](##performance-optimization-resource-optimization)
 
-## Deployment and Provisioning
+## Deployment and Provisioning (5-10%)
 
 ### Infrastructure as Code (IaC)
 - [CloudFormation](##infrastructure-as-code-iac-cloudformation)
@@ -101,7 +104,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Canary Deployment](##deployment-strategies-canary-deployment)
 - [Rolling Updates](##deployment-strategies-rolling-updates)
 
-## Monitoring and Reporting
+## Monitoring and Reporting (5-10%)
 
 ### CloudWatch
 - [Metrics and Alarms](##cloudwatch-metrics-and-alarms)
@@ -112,7 +115,7 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 - [Event Logging](##cloudtrail-event-logging)
 - [Insights](##cloudtrail-insights)
 
-## Pricing and Support
+## Pricing and Support (5-10%)
 
 ### Cost Management
 - [Cost Explorer](##cost-management-cost-explorer)
@@ -128,6 +131,10 @@ This document provides an overview of the AWS Certified Solutions Architect - As
 ---
 
 ### Notes
+- The percentages listed are approximate and represent the weight of each domain in the exam.
 - This document is a high-level overview of the exam topics. For detailed study, refer to AWS documentation and resources.
 - Keep your AWS skills up to date with hands-on practice and exam readiness materials.
+```
 
+Content is created taking help from AI tools
+ 
