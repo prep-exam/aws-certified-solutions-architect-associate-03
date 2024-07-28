@@ -134,6 +134,198 @@
   - S3 provides strong read-after-write consistency for PUTs and DELETEs of objects. PUTs apply to both new objects and overwrites of existing objects.
   - Updates to a single key are atomic, ensuring either old or new data is retrieved but not partial or corrupt data.
 
+#### Amazon S3 Notifications Overview
+
+---
+
+##### **Enabling Notifications**
+- **Configuration**: Add a notification configuration to specify events and destinations.
+- **Storage**: Configuration is stored in the notification subresource associated with a bucket.
+- **API**: Amazon S3 provides an API to manage the notification subresource.
+
+##### **Event Notification Delivery**
+- **Typical Delivery**: Events are typically delivered in seconds but can sometimes take a minute or longer.
+- **Concurrency Handling**: If two writes are made to a single non-versioned object simultaneously, only one event notification may be sent.
+- **Ensuring Event Notification**: Enable versioning on your bucket to ensure an event notification is sent for every successful write.
+
+##### **Supported Events**
+1. **New object-created events**
+2. **Object removal events**
+3. **Restore object events**
+4. **Reduced Redundancy Storage (RRS) object lost events**
+5. **Replication events**
+
+##### **Supported Destinations**
+1. **Amazon Simple Notification Service (Amazon SNS) topic**
+2. **Amazon Simple Queue Service (Amazon SQS) queue**
+3. **AWS Lambda**
+
+##### **Avoiding Execution Loops**
+- **Potential Issue**: Notifications can cause an execution loop if they result in actions that trigger more notifications.
+- **Solution**: 
+  - Use two separate buckets to avoid loops.
+  - Configure triggers to apply only to specific prefixes used for incoming objects.
+
+---
+
+###### Quick Notes
+
+ 
+- **Notification Configuration**: Add and manage using Amazon S3 API.
+- **Typical Event Delivery**: Seconds, occasionally longer.
+- **Versioning**: Ensures notifications for every successful write.
+- **Events**: Object creation, removal, restoration, RRS object loss, replication.
+- **Destinations**: SNS, SQS, Lambda.
+- **Execution Loop Prevention**: Use separate buckets or specific prefixes.
+
+##### Setting Up Amazon S3 Event Notifications for Object Creation and Removal
+
+---
+
+#### **Objectives**
+- **Track new objects added to the bucket.**
+- **Track objects removed from the bucket.**
+- **Track permanently deleted versioned objects.**
+
+> **Note:** `s3:ObjectRemoved:DeleteMarkerCreated` is triggered only when a delete marker is created for a versioned object, not when an object is deleted or a versioned object is permanently deleted.
+
+---
+
+### **Steps to Configure S3 Event Notifications**
+
+1. **Create an Amazon SNS Topic**
+
+    ```bash
+    aws sns create-topic --name my-s3-events-topic
+    ```
+
+2. **Create an Amazon SQS Queue**
+
+    ```bash
+    aws sqs create-queue --queue-name my-s3-events-queue
+    ```
+
+3. **Add SNS Subscription to SQS Queue**
+
+    ```bash
+    aws sns subscribe --topic-arn arn:aws:sns:<span style="color: blue;">region</span>:<span style="color: blue;">account-id</span>:my-s3-events-topic --protocol sqs --notification-endpoint arn:aws:sqs:<span style="color: blue;">region</span>:<span style="color: blue;">account-id</span>:my-s3-events-queue
+    ```
+
+4. **Add S3 Event Notification Configuration**
+
+    ```json
+    {
+      "NotificationConfiguration": {
+        "TopicConfigurations": [
+          {
+            "Id": "NewObjectCreatedEvents",
+            "TopicArn": "arn:aws:sns:<span style="color: blue;">region</span>:<span style="color: blue;">account-id</span>:my-s3-events-topic",
+            "Events": [
+              "s3:ObjectCreated:*"
+            ]
+          }
+        ],
+        "QueueConfigurations": [
+          {
+            "Id": "ObjectRemovedEvents",
+            "QueueArn": "arn:aws:sqs:<span style="color: blue;">region</span>:<span style="color: blue;">account-id</span>:my-s3-events-queue",
+            "Events": [
+              "s3:ObjectRemoved:Delete"
+            ]
+          }
+        ]
+      }
+    }
+    ```
+
+    **Add the above configuration using the AWS CLI:**
+
+    ```bash
+    aws s3api put-bucket-notification-configuration --bucket my-bucket --notification-configuration file://notification-config.json
+    ```
+
+---
+
+##### **Event Types Tracked**
+- **s3:ObjectCreated:\***
+    - Tracks all object creation events.
+- **s3:ObjectRemoved:Delete**
+    - Tracks object removal events, including permanent deletions of versioned objects.
+
+---
+
+###### **Summary**
+- **New SNS Topic**: `my-s3-events-topic`
+- **New SQS Queue**: `my-s3-events-queue`
+- **Notification Configuration**: Tracks `s3:ObjectCreated:*` and `s3:ObjectRemoved:Delete` events, publishing to both SNS and SQS.
+
+ 
+
+---
+### Amazon S3 Glacier Retrieval Options
+
+#### **Expedited Retrievals** ![Blue](https://via.placeholder.com/15/0000FF/000000?text=+)
+- **Purpose:** Quickly access data for urgent requests stored in the S3 Glacier Flexible Retrieval storage class or S3 Intelligent-Tiering Archive Access tier.
+- **Typical Access Time:** 1–5 minutes for archives <250 MB.
+- **Provisioned Capacity:** Ensures retrieval capacity for expedited requests.
+- **Usage:** Use the **Tier** request element in the RestoreObject REST API, AWS CLI, or AWS SDKs.
+
+#### **Standard Retrievals** ![Green](https://via.placeholder.com/15/008000/000000?text=+)
+- **Purpose:** Access any of your archives within several hours.
+- **Typical Access Time:** 3–5 hours.
+- **Default Option:** For retrieval requests that do not specify a retrieval option.
+- **Usage:** Use the **Tier** request element in the RestoreObject REST API, AWS CLI, or AWS SDKs.
+
+#### **Bulk Retrievals** ![Red](https://via.placeholder.com/15/FF0000/000000?text=+)
+- **Purpose:** Retrieve large amounts of data inexpensively.
+- **Typical Access Time:** 5–12 hours.
+- **Lowest Cost:** Ideal for retrieving petabytes of data.
+- **Usage:** Use the **Tier** request element in the RestoreObject REST API, AWS CLI, or AWS SDKs.
+
+#### **Provisioned Capacity** ![Purple](https://via.placeholder.com/15/800080/000000?text=+)
+- **Purpose:** Ensures retrieval capacity for expedited retrievals when needed.
+- **Details:** Each unit provides at least three expedited retrievals every 5 minutes and up to 150 MB/s of retrieval throughput.
+- **Recommendation:** Purchase if your workload requires highly reliable and predictable access to a subset of your data in minutes.
+- **Purchase Method:** S3 Glacier console, Purchase Provisioned Capacity (POST provisioned-capacity) REST API, AWS SDKs, AWS CLI.
+- **Duration:** A provisioned capacity unit lasts for one month from the date and time of purchase.
+- **Pricing:** Refer to [Amazon S3 Glacier Pricing](https://aws.amazon.com/s3/pricing/).
+
+### **Retrieval Options Summary** ![Orange](https://via.placeholder.com/15/FFA500/000000?text=+)
+
+| **Service**              | **Expedited**                | **Standard**               | **Bulk**                   |
+|--------------------------|------------------------------|----------------------------|----------------------------|
+| **Amazon S3 Glacier**    | 1–5 minutes                  | 3–5 hours                  | 5–12 hours                 |
+
+### **Key Points** ![Orange](https://via.placeholder.com/15/FFA500/000000?text=+)
+- **Expedited:** Fast retrievals (1–5 minutes), especially for archives <250 MB. Use provisioned capacity for guaranteed access.
+- **Standard:** Default retrieval option (3–5 hours) for general use.
+- **Bulk:** Cost-effective retrieval for large datasets (5–12 hours).
+- **Provisioned Capacity:** Ensures expedited retrieval capacity is available when needed; each unit provides three expedited retrievals every 5 minutes and up to 150 MB/s of throughput.
+
+### **Purchasing Provisioned Capacity** ![Pink](https://via.placeholder.com/15/FF1493/000000?text=+)
+- **Methods:** S3 Glacier console, REST API, AWS SDKs, AWS CLI.
+- **Benefits:** Highly reliable and predictable access to a subset of data in minutes.
+- **Duration:** Lasts for one month from the date and time of purchase.
+
+### **Range Retrievals** ![Teal](https://via.placeholder.com/15/008080/000000?text=+)
+- **Purpose:** Manage data downloads and retrieve specific parts of a large archive.
+- **Requirement:** Must provide a range that is megabyte aligned.
+- **Checksum:** Ensure data integrity using tree-hash aligned range.
+
+### **Comparative Table of Retrieval Options** ![Grey](https://via.placeholder.com/15/808080/000000?text=+)
+
+| **Aspect**                          | **Expedited**                   | **Standard**                    | **Bulk**                       |
+|-------------------------------------|---------------------------------|---------------------------------|--------------------------------|
+| **Access Time**                     | 1–5 minutes                     | 3–5 hours                       | 5–12 hours                     |
+| **Typical Use Case**                | Urgent data access              | General-purpose retrievals      | Large-scale, cost-effective retrievals |
+| **Cost**                            | Higher                          | Medium                          | Lowest                         |
+| **Provisioned Capacity**            | Available, ensures fast access  | Not required                    | Not required                   |
+| **Usage**                           | High-urgency scenarios          | Regular access needs            | Large data retrieval at low cost |
+| **Throughput with Provisioned Capacity** | Up to 150 MB/s                   | N/A                              | N/A                            |
+.
+ 
+ 
+
 - **AWS Athena:**
   - Use AWS Athena (Serverless Query Engine) to perform analytics directly against S3 objects using SQL and save the analysis report in another S3 bucket.
   - Use Cases: One-time SQL queries on S3 objects, S3 access log analysis, serverless queries on S3, IoT data analytics in S3, etc.

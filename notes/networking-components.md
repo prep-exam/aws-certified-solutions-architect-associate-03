@@ -640,3 +640,67 @@ Amazon Route 53 is a scalable and highly available Domain Name System (DNS) web 
 | **Weighting**          | Assign weights to control traffic distribution.      |
 | **Health Checks**      | Monitors and routes traffic based on resource health.|
 
+
+
+
+### <span style="color:blue">Subnets Cheat Sheet</span>
+
+#### <span style="color:blue">Key Points</span>
+- Each subnet maps to a single Availability Zone.
+- Automatically associated with the main route table for the VPC upon creation.
+- Public subnet: Traffic routed to an Internet gateway.
+- Allowed block size in VPC: /16 netmask (65,536 IP addresses) to /28 netmask (16 IP addresses).
+
+#### <span style="color:blue">Subnets Overview</span>
+- **CIDR Block for VPC**: Specify a range of IPv4 addresses (e.g., 10.0.0.0/16).
+- **Subnets in Availability Zones**: Add one or more subnets per zone.
+- **CIDR Block for Subnet**: A subset of the VPC CIDR block, must not overlap with existing blocks.
+- **Types of Subnets**:
+  - **Public Subnet**: Has an Internet gateway.
+  - **Private Subnet**: No Internet gateway.
+  - **VPN-only Subnet**: Has a virtual private gateway.
+
+#### <span style="color:blue">IPv4 CIDR Block</span>
+- Block size: /16 netmask (65,536 IP addresses) to /28 netmask (16 IP addresses).
+- First four and last IP addresses in a subnet CIDR block are reserved.
+- Cannot resize existing CIDR blocks.
+- Route added to VPC route tables automatically when a CIDR block is associated.
+
+#### <span style="color:blue">Subnet Routing</span>
+- Each subnet must be associated with a route table.
+- Automatically associated with the main route table for the VPC upon creation.
+- Change the association or the contents of the main route table.
+- **NAT Gateway/NAT Instance**: Allows outbound connections to the internet over IPv4 while preventing unsolicited inbound connections.
+- **Egress-only Internet Gateway**: Allows outbound-only communication over IPv6.
+
+#### <span style="color:blue">Subnet Security</span>
+- **Security Groups**: Control inbound and outbound traffic for instances.
+  - Up to five security groups can be associated with an instance.
+  - Default group if none specified; no inbound rules by default.
+  - Outbound rule allowing all traffic by default.
+- **Network Access Control Lists (ACLs)**: Control inbound and outbound traffic for subnets.
+  - Associated with each subnet, default if none specified.
+  - Can be associated with multiple subnets but only one ACL per subnet.
+  - Rules are evaluated in order, starting with the lowest numbered rule.
+  - Default ACL allows all traffic; custom ACLs need rules for ephemeral ports (32768-65535) and port range (1024-65535) for NAT Gateway, ELB, or Lambda functions.
+- **Flow Logs**: Capture IP traffic information for network interfaces, published to CloudWatch Logs.
+  - Diagnose security group rules, monitor traffic, determine traffic direction.
+  - Collected outside of network traffic path; no impact on performance.
+  - Several minutes delay to start collecting data; sent to Amazon S3 for analysis.
+  - Do not capture real-time log streams or IP traffic to/from link-local or AWS-reserved IPv4 addresses.
+
+### <span style="color:blue">Security Groups vs. Network ACLs</span>
+
+| **Aspect**           | **Security Group**                     | **Network ACL**                         |
+|----------------------|----------------------------------------|-----------------------------------------|
+| **Level**            | Instance level                         | Subnet level                            |
+| **Rules Supported**  | ALLOW rules only                       | ALLOW and DENY rules                    |
+| **State**            | Stateful: Return traffic allowed       | Stateless: Return traffic must be allowed explicitly |
+| **Rule Evaluation**  | Evaluate all rules before allowing traffic | Process rules in number order           |
+| **Application**      | Applies to EC2 instances and similar services using EC2 as a backend | Automatically applies to all instances in the subnets it’s associated with |
+| **Specification**    | Specified when launching instances or associated later | Automatically associated with instances in subnets |
+
+#### <span style="color:blue">Diagram of Security Groups and NACLs in a VPC</span>
+*(Here you would include a visual diagram showing the relationship and application of security groups and network ACLs within a VPC.)*
+
+ 

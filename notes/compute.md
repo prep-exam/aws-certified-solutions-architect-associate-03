@@ -146,4 +146,43 @@ Here's the information formatted in Markdown with color:
 
 ---
 
+### <span style="color:orange">AWS Fargate  </span>
+
+**AWS Fargate** is a serverless compute engine for containers that works with both Amazon Elastic Container Service (ECS) and Amazon Elastic Kubernetes Service (EKS). It simplifies the process of building applications by removing the need to provision and manage servers. Here are the key points to remember about AWS Fargate:
+
+- **Serverless Compute Engine**: Works with ECS and EKS.
+- **Focus on Applications**: Allows developers to focus on building applications without worrying about managing infrastructure.
+- **Resource Specification and Payment**: Lets you specify and pay for resources per application.
+- **Improved Security**: Enhances security through application isolation by design.
+- **Automated Compute Allocation**: Allocates the right amount of compute, eliminating the need to choose instances and scale cluster capacity.
+- **Cost Efficiency**: You only pay for the resources required to run your containers, avoiding over-provisioning and extra costs.
+- **Ephemeral Storage**: By default, Fargate tasks are given a minimum of 20 GiB of free ephemeral storage, meeting the storage requirement in various scenarios.
+
+#### <span style="color:darkgreen">AWS Fargate Features</span>
+
+1. **Serverless Compute Engine**
+   - Works with both ECS and EKS.
+   - Removes the need to provision and manage servers.
+
+2. **Resource Management**
+   - Automatically allocates the right amount of compute.
+   - Eliminates the need to choose instances and scale cluster capacity.
+
+3. **Cost Efficiency**
+   - Pay only for the resources required to run containers.
+   - No over-provisioning and paying for additional servers.
+
+4. **Application Isolation**
+   - Enhances security through isolation by design.
+
+5. **Storage**
+   - Fargate tasks come with a minimum of 20 GiB of free ephemeral storage.
+
+#### <span style="color:darkgreen">Usage and Benefits</span>
+
+- **Focus on Building Applications**: Developers can concentrate on application development rather than managing infrastructure.
+- **Predictable Costs**: Only pay for what you use, avoiding unexpected costs.
+- **Improved Security**: Application isolation by design enhances overall security.
+- **Scalability**: Automatically scales with application needs, providing the right amount of resources.
+
  
